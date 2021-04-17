@@ -13,7 +13,7 @@ export default class Header extends React.Component {
 		      </NavLink>
 
 		      <div>
-		        <NavLink to='/signin' className="main-nav-item">
+		        <NavLink to='/login' className="main-nav-item">
 		          <i className="fa fa-user-circle"></i>
 		          Sign In
 		        </NavLink>
