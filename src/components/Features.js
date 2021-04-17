@@ -1,9 +1,6 @@
 import React from 'react';
 import { featureContent } from '../data/featureItems.js';
 import '../styles/features.css';
-import chatIcon from '../assets/icon-chat.png';
-import moneyIcon from '../assets/icon-money.png';
-import securityIcon from '../assets/icon-security.png';
 
 export default class Features extends React.Component {
 	render () {
