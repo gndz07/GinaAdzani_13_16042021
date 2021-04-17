@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../components/Header.js';
 import Footer from '../components/Footer.js';
 import Homepage from '../pages/Homepage.js';
-import SignIn from '../pages/SignIn.js';
+import Login from '../pages/Login.js';
 import '../styles/root.css'
 
 export default class PageRouter extends React.Component {
@@ -14,7 +14,7 @@ export default class PageRouter extends React.Component {
 				    <Header />
 				    <Switch>
 				    	<Route exact path='/' component={Homepage} />
-				    	<Route path='/signin' component={SignIn} />
+				    	<Route path='/login' component={Login} />
 				    </Switch>
 				    <Footer />
 				</div>
