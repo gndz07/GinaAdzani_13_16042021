@@ -6,7 +6,7 @@ const initialState = {
 	message: ""
 };
 
-export default function (state = initialState, action) {
+export default function login (state = initialState, action) {
 	switch (action.type) {
 		case LOG_IN_SUCCESS:
 			return {
