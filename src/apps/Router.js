@@ -20,7 +20,9 @@ class PageRouter extends React.Component {
 				    	<Route path='/login'>
 				    		{this.props.user.isLoggedIn ? <Redirect to="/user/profile" /> : <Login />}
 				    	</Route>
-				    	<Route path='/user/profile' component={UserDashboard} />
+				    	<Route path='/user/profile'>
+				    		{this.props.user.isLoggedIn ? <UserDashboard /> : <Redirect to="/login" />}
+				    	</Route>
 				    </Switch>
 				    <Footer />
 				</div>
