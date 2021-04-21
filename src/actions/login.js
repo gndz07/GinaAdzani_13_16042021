@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS, LOG_IN_FAIL } from './types.js';
+import { LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT } from './types.js';
 import { database } from './config.js'
 
 export const logInUser = (logInDetails) => async dispatch => {
@@ -34,4 +34,10 @@ export const logInUser = (logInDetails) => async dispatch => {
 		type: LOG_IN_SUCCESS,
 		payload: userDataResult.body
 	})
-} 
+}
+
+export const logOutUser = () => dispatch => {
+	dispatch({
+		type: LOG_OUT
+	})
+}

@@ -22,7 +22,7 @@ export default function login (state = initialState, action) {
 			};
 		case LOG_OUT:
 			return {
-				...state
+				...initialState
 			};
 		default:
 			return state;

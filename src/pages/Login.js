@@ -19,7 +19,7 @@ class Login extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
-	onSubmit = e => {
+	onSubmit(e) {
 		e.preventDefault();
 
 		const logInDetails = {
