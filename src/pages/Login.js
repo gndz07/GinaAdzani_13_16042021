@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import '../styles/login.css';
 import { logInUser } from '../actions/login.js';
 
@@ -19,18 +20,17 @@ class Login extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
-	onSubmit(e) {
+	onSubmit = e => {
 		e.preventDefault();
 
 		const logInDetails = {
 			email: this.state.username,
 			password: this.state.password
 		};
-		//console.log(logInDetails);
 		this.props.logInUser(logInDetails);
 	}
 
-	render () {
+	render () { 
 		return (
 			<main className="main bg-dark">
 		      	<section className="sign-in-content">
