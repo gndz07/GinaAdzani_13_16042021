@@ -1,4 +1,5 @@
 import { LOG_IN_SUCCESS, LOG_IN_FAIL } from './types.js';
+import { database } from './config.js'
 
 export const logInUser = (logInDetails) => async dispatch => {
 	var myHeaders = new Headers();
@@ -14,7 +15,7 @@ export const logInUser = (logInDetails) => async dispatch => {
 	  redirect: 'follow'
 	};
 
-	const getToken = await fetch("http://localhost:3001/api/v1/user/login", requestOptions);
+	const getToken = await fetch(`${database}/user/login`, requestOptions);
 	const tokenResult = await getToken.json();
 
 	//second request
@@ -27,7 +28,7 @@ export const logInUser = (logInDetails) => async dispatch => {
 		redirect: 'follow'
 	};
 	
-	const userDataRequest = await fetch("http://localhost:3001/api/v1/user/profile", requestOptions2);
+	const userDataRequest = await fetch(`${database}/user/profile`, requestOptions2);
 	const userDataResult = await userDataRequest.json();
 	await dispatch({
 		type: LOG_IN_SUCCESS,
