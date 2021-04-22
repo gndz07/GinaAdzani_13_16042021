@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT } from '../actions/types';
+import { LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT, EDIT_PROFILE } from '../actions/types';
 
 const initialState = {
 	user: {},
@@ -23,6 +23,15 @@ export default function login (state = initialState, action) {
 		case LOG_OUT:
 			return {
 				...initialState
+			};
+		case EDIT_PROFILE:
+			return {
+				...state,
+				user: {
+					...state.user,
+					firstName: action.payload.firstName,
+					lastName: action.payload.lastName
+				}
 			};
 		default:
 			return state;
