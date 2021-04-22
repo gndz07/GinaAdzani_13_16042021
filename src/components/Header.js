@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { logOutUser } from '../actions/login.js';
 import Logo from '../assets/argentBankLogo.png';
 import '../styles/header.css';
@@ -47,6 +48,11 @@ class Header extends React.Component {
 		    </nav>
 		)
 	}
+}
+
+Header.propTypes = {
+	logOutUser: PropTypes.func,
+	user: PropTypes.object
 }
 
 const mapStateToProps = state => ({

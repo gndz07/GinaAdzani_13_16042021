@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/account.css';
 
 export default class Account extends React.Component {
@@ -16,4 +17,9 @@ export default class Account extends React.Component {
 		      </section>
 		)
 	}
+}
+
+Account.propTypes = {
+	accountType: PropTypes.string,
+	amount: PropTypes.string
 }

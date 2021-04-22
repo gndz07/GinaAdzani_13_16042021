@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import '../styles/login.css';
 import { logInUser } from '../actions/login.js';
 
@@ -62,6 +63,11 @@ class Login extends React.Component {
 			</main>
 		)
 	}
+}
+
+Login.propTypes = {
+	logInUser: PropTypes.func,
+	user: PropTypes.object
 }
 
 const mapStateToProps = state => ({
