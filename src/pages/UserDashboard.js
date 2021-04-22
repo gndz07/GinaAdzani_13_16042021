@@ -4,15 +4,60 @@ import Account from '../components/Account.js';
 import '../styles/user-dashboard.css';
 
 class UserDashboard extends React.Component {
-	
+	constructor(props) {
+		super(props);
+		this.state = {
+			editActive: false,
+			firstName: this.props.user.user.firstName,
+			lastName: this.props.user.user.lastName
+		};
+
+		this.handleClickEditName = this.handleClickEditName.bind(this);
+		this.onChange = this.onChange.bind(this);
+	}
+
+	handleClickEditName = e => {
+		e.preventDefault();
+
+		this.setState({
+			editActive: !this.state.editActive
+		});
+	}
+
+	onChange = e => {
+		this.setState({ [e.target.name]: e.target.value });
+	}
+
 	render () {
 		return (
 			<main className="main bg-dark">
 		      <div className="header">
 		        <h1>Welcome back<br />
-		        	{this.props.user.user.firstName} {this.props.user.user.lastName}!
+		        	<span className={ `${this.state.editActive ? "hidden" : ""}` }>
+		        		{this.state.firstName} {this.state.lastName}!
+		        	</span>
 		        </h1>
-		        <button className="edit-button">Edit Name</button>
+		        <button className={`edit-button ${this.state.editActive ? "hidden" : ""}`} onClick={this.handleClickEditName}>
+		        	Edit Name
+		        </button>
+
+		        <form className={ `${this.state.editActive ? "" : "hidden"}` }>
+		        	<section className="edit-name-inputs">
+			        	<input type="text" id="firstName" name="firstName" className="edit-name-inputs__item" 
+			        		placeholder={this.state.firstName} onChange={this.onChange} value={this.state.firstName} />
+			        	<input type="text" id="lastName" name="lastName" className="edit-name-inputs__item" 
+			        		placeholder={this.state.lastName} onChange={this.onChange} value={this.state.lastName} />
+			        </section>
+
+			        <section className="edit-name-buttons">
+				        <button type="submit" className="edit-name-buttons__item">
+				        	Save
+				        </button>
+				        <button className="edit-name-buttons__item" onClick={this.handleClickEditName}>
+				        	Cancel
+				        </button>
+			        </section>
+		        </form>
 		      </div>
 		      <h2 className="sr-only">Accounts</h2>
 		      <Account accountType="Checking (x8349)" amount="$2,082.79" />
