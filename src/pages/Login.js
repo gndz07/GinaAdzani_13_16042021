@@ -19,14 +19,18 @@ class Login extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
-	onSubmit(e) {
+	onSubmit = async e => {
 		e.preventDefault();
 
 		const logInDetails = {
 			email: this.state.username,
 			password: this.state.password
 		};
-		this.props.logInUser(logInDetails);
+		await this.props.logInUser(logInDetails);
+		if (this.props.user.message == "Log in failed!") {
+			window.location.reload(true);
+			window.alert("Please fill in with correct username and password.");
+		}
 	}
 
 	render () { 
@@ -38,12 +42,12 @@ class Login extends React.Component {
 			        <form onSubmit={this.onSubmit}>
 			          <div className="input-wrapper">
 			            <label htmlFor="username">Username</label>
-			            <input type="text" id="username" name="username"
+			            <input type="text" id="username" name="username" autoComplete="username"
 			            	onChange={this.onChange} value={this.state.username} />
 			          </div>
 			          <div className="input-wrapper">
 			            <label htmlFor="password">Password</label>
-			            <input type="password" id="password" name="password"
+			            <input type="password" id="password" name="password" autoComplete="current-password"
 			            	onChange={this.onChange} value={this.state.password} />
 			          </div>
 			          <div className="input-remember">
@@ -60,4 +64,8 @@ class Login extends React.Component {
 	}
 }
 
-export default connect(null, { logInUser })(Login);
+const mapStateToProps = state => ({
+	user: state.login
+});
+
+export default connect(mapStateToProps, { logInUser })(Login);
