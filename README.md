@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Argent Bank App
+
+Bank application that lets user to log in and see their profile.
+
+Data was fetched from an external NodeJS server.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+- [npm](https://www.npmjs.com/) v6.14.11
 
-### `yarn start`
+- [NodeJS](https://nodejs.org/en/) v.14.16.0
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Dependencies
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [React](https://reactjs.org/) v17.0.1
 
-### `yarn test`
+- [Redux](https://redux.js.org/) v4.0.5
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [react-redux](https://react-redux.js.org/) v7.2.3
 
-### `yarn build`
+- [redux-thunk](https://github.com/reduxjs/redux-thunk) v2.3.0
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [react-router-dom](https://reactrouter.com/web/guides/quick-start) v5.2.0
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [prop-types](https://www.npmjs.com/package/prop-types) v15.7.2
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Database
 
-### `yarn eject`
+Clone this [external NodeJS server](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API) for the micro API of this project.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Install this project on your local
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Fork this repository
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Clone to your local on a directory of your choice.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- From the terminal, change directory to the cloned project directory.
 
-## Learn More
+- Install with command `npm i`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Run the project with command `npm start`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The project will run in `http://localhost:3000` (reserve port 3001 for micro API)
 
-### Code Splitting
+## Existing path
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- For the time being, the existing paths are:
+	- `http://localhost:3000/` for homepage
+	- `http://localhost:3000/login` for login page
+	- `http://localhost:3000/user/profile` for user profile page, only accessible after a succesful login authentification
