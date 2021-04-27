@@ -30,7 +30,7 @@ class UserName extends React.Component {
 
 	onSubmit = e => {
 		e.preventDefault();
-		this.props.editProfile(this.state.firstName, this.state.lastName);
+		this.props.editProfile(this.props.user.authToken, this.state.firstName, this.state.lastName);
 		this.setState({
 			editActive: !this.state.editActive
 		});

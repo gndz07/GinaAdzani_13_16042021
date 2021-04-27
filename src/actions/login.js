@@ -20,7 +20,7 @@ export const logInUser = (logInDetails) => async dispatch => {
 
 		//second request
 		var myHeaders2 = new Headers();
-		myHeaders2.append("Authorization", "Bearer " + tokenResult.body.token);
+		myHeaders2.append("Authorization", `Bearer ${tokenResult.body.token}`);
 
 		var requestOptions2 = {
 			method: 'POST',
