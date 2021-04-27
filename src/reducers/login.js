@@ -1,6 +1,7 @@
 import { LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT, EDIT_PROFILE } from '../actions/types';
 
 const initialState = {
+	authToken: '',
 	user: {},
 	isLoggedIn: false,
 	message: ""
@@ -11,6 +12,7 @@ export default function login (state = initialState, action) {
 		case LOG_IN_SUCCESS:
 			return {
 				...state,
+				authToken: action.authToken,
 				user: action.payload,
 				isLoggedIn: true,
 				message: "Log in success!"

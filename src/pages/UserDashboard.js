@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Account from '../components/Account.js';
 import UserName from '../components/UserName.js';
 import '../styles/user-dashboard.css';

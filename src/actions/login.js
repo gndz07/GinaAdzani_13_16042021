@@ -4,7 +4,6 @@ import { database } from './config.js'
 export const logInUser = (logInDetails) => async dispatch => {
 	try {
 		var myHeaders = new Headers();
-		myHeaders.append("Authorization", "Basic c3RldmVAcm9nZXJzLmNvbTo=");
 		myHeaders.append("Content-Type", "application/json");
 
 		var raw = JSON.stringify(logInDetails);
@@ -33,7 +32,8 @@ export const logInUser = (logInDetails) => async dispatch => {
 		const userDataResult = await userDataRequest.json();
 		dispatch({
 			type: LOG_IN_SUCCESS,
-			payload: userDataResult.body
+			payload: userDataResult.body,
+			authToken: tokenResult.body.token
 		})
 	} catch(e) {
 		dispatch({
