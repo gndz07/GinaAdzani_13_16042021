@@ -28,12 +28,26 @@ class UserName extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
+	//function to capitalize name input
+	capitalize = string => {
+  		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 	onSubmit = e => {
 		e.preventDefault();
-		this.props.editProfile(this.props.user.authToken, this.state.firstName, this.state.lastName);
-		this.setState({
-			editActive: !this.state.editActive
-		});
+		const nameRegex =/^[^\s]+(\s+[^\s]+)*$/;
+		//check if the name field is empty
+		if (!nameRegex.test(this.state.firstName) || !nameRegex.test(this.state.lastName)) {
+			window.alert("Please enter valid answer in the field(s)")
+		} else {
+			//make first letter of each name in capital letter
+			const newFirstName = this.capitalize(this.state.firstName);
+			const newLastName = this.capitalize(this.state.lastName);
+			//call the function to send API request
+			this.props.editProfile(this.props.user.authToken, newFirstName, newLastName);
+			this.setState({
+				editActive: !this.state.editActive
+			});
+		}
 	}
 
 	render() {

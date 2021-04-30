@@ -29,5 +29,4 @@ export const editProfile = (token, firstName, lastName) => dispatch => {
 			}
 		}))
 	  .catch(error => console.log('error', error));
-
 }
