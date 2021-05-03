@@ -1,9 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { checkToken } from '../actions/checkToken.js';
 import Account from '../components/Account.js';
 import UserName from '../components/UserName.js';
 import '../styles/user-dashboard.css';
 
-export default class UserDashboard extends React.Component {
+class UserDashboard extends React.Component {
+
+	componentDidMount() {
+		const logInDetails = {
+			email: this.props.user.user.email,
+			password: this.props.user.pass
+		};
+		this.props.checkToken(this.props.user.authToken, logInDetails);
+	}
+
 	render () {
 		return (
 			<main className="main bg-dark">
@@ -16,5 +27,11 @@ export default class UserDashboard extends React.Component {
 		)
 	}
 };
+
+const mapStateToProps = state => ({
+	user: state.login
+});
+
+export default connect(mapStateToProps, { checkToken })(UserDashboard);
 
 

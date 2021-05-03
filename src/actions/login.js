@@ -33,7 +33,8 @@ export const logInUser = (logInDetails) => async dispatch => {
 		dispatch({
 			type: LOG_IN_SUCCESS,
 			payload: userDataResult.body,
-			authToken: tokenResult.body.token
+			authToken: tokenResult.body.token,
+			pass: logInDetails.password
 		})
 	} catch(e) {
 		dispatch({

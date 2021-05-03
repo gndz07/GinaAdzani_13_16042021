@@ -1,7 +1,8 @@
-import { LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT, EDIT_PROFILE } from '../actions/types';
+import { LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT, EDIT_PROFILE, REFRESH_TOKEN } from '../actions/types';
 
 const initialState = {
 	authToken: '',
+	pass: '',
 	user: {},
 	isLoggedIn: false,
 	message: ""
@@ -13,6 +14,7 @@ export default function login (state = initialState, action) {
 			return {
 				...state,
 				authToken: action.authToken,
+				pass: action.pass,
 				user: action.payload,
 				isLoggedIn: true,
 				message: "Log in success!"
@@ -22,6 +24,11 @@ export default function login (state = initialState, action) {
 				...state,
 				message: "Log in failed!"
 			};
+		case REFRESH_TOKEN:
+			return {
+				...state,
+				authToken: action.payload
+			}
 		case LOG_OUT:
 			return {
 				...initialState

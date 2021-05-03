@@ -28,7 +28,7 @@ class Login extends React.Component {
 			password: this.state.password
 		};
 		await this.props.logInUser(logInDetails);
-		if (this.props.user.message == "Log in failed!") {
+		if (this.props.user.message === "Log in failed!") {
 			window.location.reload(true);
 			window.alert("Please fill in with correct username and password.");
 		}
@@ -52,7 +52,7 @@ class Login extends React.Component {
 			            	onChange={this.onChange} value={this.state.password} />
 			          </div>
 			          <div className="input-remember">
-			            <input type="checkbox" id="remember-me" />
+			            <input type="checkbox" id="remember-me" defaultChecked />
 			            <label htmlFor="remember-me">
 			            	Remember me
 			        	</label>

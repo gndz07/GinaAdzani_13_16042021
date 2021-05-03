@@ -14,6 +14,7 @@ class UserName extends React.Component {
 
 		this.handleClickEditName = this.handleClickEditName.bind(this);
 		this.onChange = this.onChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this)
 	}
 
 	handleClickEditName = e => {
