@@ -40,11 +40,13 @@ class UserName extends React.Component {
 		if (!nameRegex.test(this.state.firstName) || !nameRegex.test(this.state.lastName)) {
 			window.alert("Please enter valid answer in the field(s)")
 		} else {
-			//make first letter of each name in capital letter
-			const newFirstName = this.capitalize(this.state.firstName);
-			const newLastName = this.capitalize(this.state.lastName);
-			//call the function to send API request
-			this.props.editProfile(this.props.user.authToken, newFirstName, newLastName);
+			//group the names into an object
+			const newName = {
+				firstName: this.capitalize(this.state.firstName),
+				lastName: this.capitalize(this.state.lastName)
+			};
+			//call the action to edit name
+			this.props.editProfile(this.props.user.authToken, newName);
 			this.setState({
 				editActive: !this.state.editActive
 			});
