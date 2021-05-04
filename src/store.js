@@ -8,15 +8,11 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const persistConfig = {
-  key: 'root',
-  storage,
-}
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+//const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
-	persistedReducer,
+	rootReducer,
 	initialState,
 	compose(
 		applyMiddleware(...middleware),

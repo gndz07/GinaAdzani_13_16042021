@@ -9,11 +9,13 @@ class Login extends React.Component {
 		super(props);
 		this.state = {
 			username: "",
-			password: ""
+			password: "",
+			rememberUser: true
 		};
 
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.rememberMeCheck = this.rememberMeCheck.bind(this);
 	}
 
 	onChange = e => {
@@ -27,10 +29,22 @@ class Login extends React.Component {
 			email: this.state.username,
 			password: this.state.password
 		};
-		await this.props.logInUser(logInDetails);
+		await this.props.logInUser(logInDetails, this.state.rememberUser);
 		if (this.props.user.message === "Log in failed!") {
 			//window.location.reload(true);
 			window.alert("Please fill in with correct username and password.");
+		}
+	}
+
+	rememberMeCheck = e => {
+		if (!e.checked) {
+			this.setState({
+				rememberUser: false
+			})
+		} else {
+			this.setState({
+				rememberUser: true
+			})
 		}
 	}
 
@@ -52,7 +66,8 @@ class Login extends React.Component {
 			            	onChange={this.onChange} value={this.state.password} />
 			          </div>
 			          <div className="input-remember">
-			            <input type="checkbox" id="remember-me" defaultChecked />
+			            <input type="checkbox" id="remember-me" defaultChecked 
+			            	onChange={this.rememberMeCheck} />
 			            <label htmlFor="remember-me">
 			            	Remember me
 			        	</label>
@@ -71,7 +86,7 @@ Login.propTypes = {
 }
 
 const mapStateToProps = state => ({
-	user: state.login
+	user: state.login,
 });
 
 export default connect(mapStateToProps, { logInUser })(Login);

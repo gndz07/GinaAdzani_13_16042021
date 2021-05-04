@@ -5,7 +5,8 @@ const initialState = {
 	pass: '',
 	user: {},
 	isLoggedIn: false,
-	message: ""
+	message: "",
+	rememberUser: false
 };
 
 export default function login (state = initialState, action) {
@@ -17,7 +18,8 @@ export default function login (state = initialState, action) {
 				pass: action.pass,
 				user: action.payload,
 				isLoggedIn: true,
-				message: "Log in success!"
+				message: "Log in success!",
+				rememberUser: action.remember
 			};
 		case LOG_IN_FAIL:
 			return {

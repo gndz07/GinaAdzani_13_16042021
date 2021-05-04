@@ -1,6 +1,5 @@
 import { EDIT_PROFILE } from './types.js';
 import { putRequest } from '../services/putRequest.js';
-import { database } from './config.js'
 
 export const editProfile = (token, newName) => async dispatch => {
 	try {

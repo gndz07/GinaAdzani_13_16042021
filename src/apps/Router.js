@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import { logOutUser } from '../actions/login.js';
 import Header from '../components/Header.js';
 import Footer from '../components/Footer.js';
 import Homepage from '../pages/Homepage.js';
@@ -10,6 +11,14 @@ import UserDashboard from '../pages/UserDashboard.js';
 import '../styles/root.css'
 
 class PageRouter extends React.Component {
+	componentDidMount() {
+		window.addEventListener("beforeunload", e => {
+			e.preventDefault();
+			if (!this.props.user.rememberUser) {
+				this.props.logOutUser();
+			}
+		})
+	}
 	render () {
 		return (
 			<Router>
@@ -34,4 +43,4 @@ class PageRouter extends React.Component {
 const mapStateToProps = state => ({
 	user: state.login
 });
-export default connect(mapStateToProps)(PageRouter);
+export default connect(mapStateToProps, {logOutUser})(PageRouter);
