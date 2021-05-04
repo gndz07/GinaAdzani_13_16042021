@@ -1,29 +1,19 @@
 import { LOG_IN_SUCCESS, LOG_IN_FAIL, LOG_OUT } from './types.js';
-import { database } from '../services/apiURL.js';
-import { getToken } from '../services/getToken';
+import { getToken } from '../services/getToken.js';
+import { fetchUserData } from '../services/fetchUserData.js';
 
 export const logInUser = (logInDetails) => async dispatch => {
 	try {
 		//get the token
-		const tokenResult = await getToken(logInDetails);
+		const token = await getToken(logInDetails);
 
 		//fetch user data
-		var myHeaders2 = new Headers();
-		myHeaders2.append("Authorization", `Bearer ${tokenResult}`);
-
-		var requestOptions2 = {
-			method: 'POST',
-			headers: myHeaders2,
-			redirect: 'follow'
-		};
-		
-		const userDataRequest = await fetch(`${database}/user/profile`, requestOptions2);
-		const userDataResult = await userDataRequest.json();
+		const userData = await fetchUserData(token, "profile");
 		//dispatch action
 		dispatch({
 			type: LOG_IN_SUCCESS,
-			payload: userDataResult.body,
-			authToken: tokenResult,
+			payload: userData,
+			authToken: token,
 			pass: logInDetails.password
 		})
 	} catch(e) {

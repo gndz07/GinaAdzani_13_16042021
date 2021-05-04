@@ -1,4 +1,3 @@
-import { database } from './config.js';
 import { REFRESH_TOKEN, LOG_OUT } from './types.js';
 import { getToken } from '../services/getToken';
 
@@ -27,5 +26,3 @@ export const checkToken = (token, logInDetails) => async dispatch => {
 		}
 	}
 };
-
-
