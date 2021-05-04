@@ -29,7 +29,7 @@ class Login extends React.Component {
 		};
 		await this.props.logInUser(logInDetails);
 		if (this.props.user.message === "Log in failed!") {
-			window.location.reload(true);
+			//window.location.reload(true);
 			window.alert("Please fill in with correct username and password.");
 		}
 	}

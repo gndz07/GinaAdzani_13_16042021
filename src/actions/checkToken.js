@@ -1,7 +1,8 @@
 import { database } from './config.js';
-import { REFRESH_TOKEN } from './types.js';
+import { REFRESH_TOKEN, LOG_OUT } from './types.js';
+import { getToken } from '../services/getToken';
 
-export const checkToken = (token, logInDetails) => dispatch => {
+export const checkToken = (token, logInDetails) => async dispatch => {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
@@ -11,27 +12,19 @@ export const checkToken = (token, logInDetails) => dispatch => {
     const tokenExpiry = JSON.parse(jsonPayload);
 
     if (tokenExpiry < new Date().getTime()/1000) {
-    	const myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-
-		const raw = JSON.stringify(logInDetails);
-
-		const requestOptions = {
-		  method: 'POST',
-		  headers: myHeaders,
-		  body: raw,
-		  redirect: 'follow'
-		};
-
-		fetch(`${database}/user/login`, requestOptions)
-		  .then(response => response.json())
-		  .then(result =>
-		  	dispatch({
-		  		type: REFRESH_TOKEN,
-		  		payload: result.body.token
-		  	})
-		  	)
-		  .catch(error => console.log('error', error));
+    	try {
+    		//fetch new token
+	    	const token = await getToken(logInDetails);
+			//replace token in the state
+			dispatch({
+			  	type: REFRESH_TOKEN,
+			  	payload: token
+			})
+    	} catch(e) {
+			dispatch({
+				type: LOG_OUT
+			})
+		}
 	}
 };
 
