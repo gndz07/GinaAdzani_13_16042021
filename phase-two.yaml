@@ -5,21 +5,51 @@ info:
   title: "Argent Bank API Documentation"
   termsOfService: "http://swagger.io/terms/"
 
-host: "localhost:3001/api"
-basePath: "/v2"
+host: "localhost:3001"
+basePath: "/api/v2"
 tags:
-- name: "User Transaction"
-  description: "Endpoints for user's transaction data"
+- name: "User Account"
+  description: "Endpoints for user's account data"
+- name: "User Transactions"
+  description: "Endpoints for user's transactions data"
 schemes:
 - "https"
 - "http"
 paths:
-  /user/transactions:
-    post:
+  /user/account:
+    get:
       tags:
-      - "User Transaction"
-      summary: "Summary of user's transaction"
-      description: "API to fetch user's transaction summary"
+      - "User Account"
+      summary: "Summary of user's account"
+      description: "API to fetch user's account summary"
+      operationId: "userAccount"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Attach Bearer JWT Token"
+        required: true
+      responses:
+        "200":
+          description: "User account details retrieved succesfully"
+          schema:
+            items:
+              $ref: "#/definitions/AccountsSummary"
+        "400":
+          description: "Invalid token"
+        "500":
+          description: "Internal server error"
+          
+  /user/account/${accountID}/transaction:
+    get:
+      tags:
+      - "User Transactions"
+      summary: "Transactions for the selected type of account"
+      description: "API to fetch user's transactions in one type of account"
       operationId: "userTransaction"
       consumes:
       - "application/json"
@@ -31,34 +61,11 @@ paths:
         type: "string"
         description: "Attach Bearer JWT Token"
         required: true
-      responses:
-        "200":
-          description: "User transactions retrieved succesfully"
-          schema:
-            items:
-              $ref: "#/definitions/AccountsSummary"
-        "400":
-          description: "Invalid token"
-        "500":
-          description: "Internal server error"
-          
-  /user/transactions/checking:
-    post:
-      tags:
-      - "User Transaction"
-      summary: "Checking account transactions"
-      description: "API to fetch user's checking account transactions"
-      operationId: "userCheckingTransaction"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "header"
-        name: "Authorization"
-        type: "string"
-        description: "Attach Bearer JWT Token"
+      - in: path
+        name: accountID
+        type: integer
         required: true
+        description: "Numeric ID of the account to get"
       responses:
         "200":
           description: "User transactions retrieved succesfully"
@@ -69,12 +76,14 @@ paths:
           description: "Invalid token"
         "500":
           description: "Internal server error"
-    put:
+
+  /user/account/${accountID}/transaction/${transactionID}:
+    get:
       tags:
-      - "User Transaction"
-      summary: "Update transaction details"
-      description: ""
-      operationId: "updateChecking"
+      - "User Transactions"
+      summary: "Transaction details for the selected transaction ID"
+      description: "API to fetch user's transaction details"
+      operationId: "userTransactionDetail"
       consumes:
       - "application/json"
       produces:
@@ -85,53 +94,29 @@ paths:
         type: "string"
         description: "Attach Bearer JWT Token"
         required: true
-      - in: "body"
-        name: "body"
-        description: "Details that need to be updated"
+      - in: path
+        name: accountID
+        type: integer
         required: true
-        schema:
-          $ref: "#/definitions/UpdateTransactionDetails"
+        description: "Numeric ID of the account to get"
+      - in: path
+        name: transactionID
+        type: integer
+        required: true
+        description: "Numeric ID of the transaction to get"
       responses:
         "200":
-          description: Transaction details updated succesfully"
+          description: "User transaction details retrieved succesfully"
           schema:
             items:
-              $ref: "#/definitions/APIResponse"
-        "400":
-          description: "Invalid fields"
-        "500":
-          description: "Internal server error"
-          
-  /user/transactions/savings:
-    post:
-      tags:
-      - "User Transaction"
-      summary: "Savings account transactions"
-      description: "API to fetch user's savings account transactions"
-      operationId: "userSavingsTransaction"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "header"
-        name: "Authorization"
-        type: "string"
-        description: "Attach Bearer JWT Token"
-        required: true
-      responses:
-        "200":
-          description: "User transactions retrieved succesfully"
-          schema:
-            items:
-              $ref: "#/definitions/AccountTransactions"
+              $ref: "#/definitions/TransactionDetails"
         "400":
           description: "Invalid token"
         "500":
           description: "Internal server error"
     put:
       tags:
-      - "User Transaction"
+      - "User Transactions"
       summary: "Update transaction details"
       description: ""
       operationId: "updateSavings"
@@ -150,67 +135,17 @@ paths:
         description: "Details that need to be updated"
         required: true
         schema:
-          $ref: "definitions/UpdateTransactionDetails"
-      responses:
-        "200":
-          description: Transaction details updated succesfully"
-          schema:
-            items:
-              $ref: "#/definitions/APIResponse"
-        "400":
-          description: "Invalid fields"
-        "500":
-          description: "Internal server error"
-          
-  /user/transactions/creditcard:
-    post:
-      tags:
-      - "User Transaction"
-      summary: "Credit card transactions"
-      description: "API to fetch user's credit card transactions"
-      operationId: "userCreditCardTransaction"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "header"
-        name: "Authorization"
-        type: "string"
-        description: "Attach Bearer JWT Token"
-        required: true
-      responses:
-        "200":
-          description: "User transactions retrieved succesfully"
-          schema:
-            items:
-              $ref: "#/definitions/AccountTransactions"
-        "400":
-          description: "Invalid token"
-        "500":
-          description: "Internal server error"
-    put:
-      tags:
-      - "User Transaction"
-      summary: "Update transaction details"
-      description: ""
-      operationId: "updateCreditCard"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "header"
-        name: "Authorization"
-        type: "string"
-        description: "Attach Bearer JWT Token"
-        required: true
-      - in: "body"
-        name: "body"
-        description: "Details that need to be updated"
-        required: true
-        schema:
           $ref: "#/definitions/UpdateTransactionDetails"
+      - in: path
+        name: accountID
+        type: integer
+        required: true
+        description: "Numeric ID of the account to get"
+      - in: path
+        name: transactionID
+        type: integer
+        required: true
+        description: "Numeric ID of the transaction to get"
       responses:
         "200":
           description: Transaction details updated succesfully"
@@ -232,12 +167,10 @@ definitions:
       body:
         type: "object"
         properties:
-          checking: 
+          balance: 
             type: "integer"
-          savings: 
-            type: "integer"
-          creditCard:
-            type: "integer"
+          type: 
+            type: "string"
             
   AccountTransactions:
     type: "object"
@@ -245,25 +178,31 @@ definitions:
       id:
         type: "integer"
         format: "int32"
-      transactions:
-        type: "array"
-        items:
-          type: "object"
-          properties:
-            date:
-              type: "string"
-            type:
-              type: "string"
-            category:
-              type: "string"
-            description:
-              type: "string"
-            notes:
-              type: "string"
-            amount:
-              type: "integer"
-            balance:
-              type: "integer"
+      transaction:
+        type: "object"
+        properties:
+          date:
+            type: "string"
+          description:
+            type: "string"
+          amount:
+            type: "integer"
+              
+  TransactionDetails:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      details:
+        type: "object"
+        properties:
+          type:
+            type: "string"
+          category:
+            type: "string"
+          notes:
+            type: "integer"
               
   UpdateTransactionDetails:
     type: "object"
@@ -288,5 +227,3 @@ definitions:
             type: "string"
           notes:
             type: "string"
-
-
