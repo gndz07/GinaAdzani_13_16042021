@@ -3,12 +3,10 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import sessionStorage from 'redux-persist/lib/storage/session'
 import login from './login.js';
-import loginTemp from './login.js';
 
 const persistConfig = {
   key: 'root',
-  storage,
-  blacklist: ['loginTemp'],
+  storage
 }
 
 const rootReducer =  combineReducers({
