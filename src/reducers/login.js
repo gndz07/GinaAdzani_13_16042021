@@ -6,7 +6,7 @@ const initialState = {
 	user: {},
 	isLoggedIn: false,
 	message: "",
-	rememberUser: false
+	rememberUser: true
 };
 
 export default function login (state = initialState, action) {
