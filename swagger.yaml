@@ -49,7 +49,7 @@ paths:
         "500":
           description: "Internal server error"
           
-  /user/account/${accountID}/transaction:
+  /user/account/${accountID}/transaction/${accountTypeID}:
     get:
       tags:
       - "User Transactions"
@@ -71,6 +71,11 @@ paths:
         type: integer
         required: true
         description: "Numeric ID of the account to get"
+      - in: path
+        name: accountTypeID
+        type: integer
+        required: true
+        description: "Numeric ID of the type of transaction to get"
       responses:
         "200":
           description: "User transactions retrieved succesfully"
@@ -82,7 +87,7 @@ paths:
         "500":
           description: "Internal server error"
 
-  /user/account/${accountID}/transaction/${transactionID}:
+  /user/account/${accountID}/transaction//${accountTypeID}/${transactionID}:
     get:
       tags:
       - "User Transactions"
@@ -104,6 +109,11 @@ paths:
         type: integer
         required: true
         description: "Numeric ID of the account to get"
+      - in: path
+        name: accountTypeID
+        type: integer
+        required: true
+        description: "Numeric ID of the type of transaction to get"
       - in: path
         name: transactionID
         type: integer
@@ -135,6 +145,11 @@ paths:
         type: "string"
         description: "Attach Bearer JWT Token"
         required: true
+      - in: path
+        name: accountTypeID
+        type: integer
+        required: true
+        description: "Numeric ID of the type of transaction to get"
       - in: "body"
         name: "body"
         description: "Details that need to be updated"
@@ -218,3 +233,5 @@ definitions:
             type: "string"
           notes:
             type: "string"
+
+
