@@ -16,11 +16,11 @@ schemes:
 - "https"
 - "http"
 paths:
-  /user/account/${accountID}:
+  /user/account:
     get:
       tags:
       - "User Account"
-      summary: "Summary of user's account"
+      summary: "Summary of user's accounts"
       description: "API to fetch user's account summary"
       operationId: "userAccount"
       consumes:
@@ -33,11 +33,6 @@ paths:
         type: "string"
         description: "Attach Bearer JWT Token"
         required: true
-      - in: path
-        name: accountID
-        type: integer
-        required: true
-        description: "Numeric ID of the account to get"
       responses:
         "200":
           description: "User account details retrieved succesfully"
@@ -49,7 +44,7 @@ paths:
         "500":
           description: "Internal server error"
           
-  /user/account/${accountID}/transaction/${accountTypeID}:
+  /user/account/transaction/${accountTypeID}:
     get:
       tags:
       - "User Transactions"
@@ -67,11 +62,6 @@ paths:
         description: "Attach Bearer JWT Token"
         required: true
       - in: path
-        name: accountID
-        type: integer
-        required: true
-        description: "Numeric ID of the account to get"
-      - in: path
         name: accountTypeID
         type: integer
         required: true
@@ -87,7 +77,7 @@ paths:
         "500":
           description: "Internal server error"
 
-  /user/account/${accountID}/transaction//${accountTypeID}/${transactionID}:
+  /user/account/transaction/${accountTypeID}/${transactionID}:
     get:
       tags:
       - "User Transactions"
@@ -104,11 +94,6 @@ paths:
         type: "string"
         description: "Attach Bearer JWT Token"
         required: true
-      - in: path
-        name: accountID
-        type: integer
-        required: true
-        description: "Numeric ID of the account to get"
       - in: path
         name: accountTypeID
         type: integer
@@ -161,12 +146,6 @@ paths:
               type: "string"
             notes:
                type: "string"
-        
-      - in: path
-        name: accountID
-        type: integer
-        required: true
-        description: "Numeric ID of the account to get"
       - in: path
         name: transactionID
         type: integer
